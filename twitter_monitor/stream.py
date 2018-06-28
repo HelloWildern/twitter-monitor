@@ -25,7 +25,7 @@ class DynamicTwitterStream(object):
 
         self.polling = False
         self.stream = None
-        
+
         self.retry_count = options.get("retry_count", 5)
         self.unfiltered = options.get('unfiltered', False)
         self.languages = options.get('languages', None)
@@ -90,7 +90,7 @@ class DynamicTwitterStream(object):
             return
 
         logger.info("Restarting stream...")
-        
+
         # Stop any old stream
         self.stop_stream()
 
@@ -112,13 +112,13 @@ class DynamicTwitterStream(object):
             if len(tracking_terms) > 0:
                 logger.info("Starting new twitter stream with %s terms:", len(tracking_terms))
                 logger.info("  %s", repr(tracking_terms))
-                
+
                 # Launch it in a new thread
-                self.stream.filter(track=tracking_terms, async=True, languages=self.languages)
+                self.stream.filter(track=tracking_terms, is_async=True, languages=self.languages)
             else:
                 logger.info("Starting new unfiltered stream")
                 self.stream.sample(async=True, languages=self.languages)
-                
+
     def stop_stream(self):
         """
         Stops the current stream. Blocks until this is done.
@@ -138,11 +138,11 @@ class DynamicTwitterStream(object):
     def handle_exceptions(self):
         # check to see if an exception was raised in the streaming thread
         if self.listener.streaming_exception is not None:
-            
+
             # Clear the exception
             exc = self.listener.streaming_exception
             self.listener.streaming_exception = None
-            
+
             logger.warning("Streaming exception: %s", exc)
             # propagate outward
             raise exc
