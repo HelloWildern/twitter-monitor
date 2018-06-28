@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION="0.3.0"
+VERSION="0.3.1"
 
 setup(
     name="twitter-monitor",
@@ -22,7 +22,7 @@ setup(
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
         "License :: OSI Approved :: MIT License",
-        
+
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.4",
